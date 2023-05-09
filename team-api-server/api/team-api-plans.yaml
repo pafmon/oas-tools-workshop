@@ -1,0 +1,44 @@
+sla4oas: '1.0.1'
+context:
+  id: team-api
+  type: plans
+  api:
+    '$ref': ./team-api-oas.yaml
+  provider: PFM
+metrics:
+  requests:
+    type: 'integer'
+    format: 'int64'
+    description: 'Number of requests'
+plans:
+  base:
+    availability: R/00:00:00Z/23:59:59Z
+    rates:
+      '/api/v1/teams':
+        get:
+          requests:
+            - max: 10
+              period: minute
+    quotas:
+      '/api/v1/teams':
+        post:
+          requests:
+            - max: 5
+              period: day
+  pro:
+    pricing:
+      cost: 19
+      currency: USD
+      billing: monthly
+    rates:
+      '/api/v1/teams':
+        get:
+          requests:
+            - max: 10
+              period: minute
+    quotas:
+      '/api/v1/teams':
+        post:
+          requests:
+            - max: 5
+              period: day
